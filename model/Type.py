@@ -4,12 +4,12 @@ from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
 
 
-class Type(Base):
-    __tablename__ = "TargetTypes"
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    target_type_id = Column(String(100), unique=True, nullable=False)
+class TargetType(Base):
+    __tablename__ = "targettypes"
+    target_type_id = Column(Integer, primary_key=True, autoincrement=True)
+    target_type_name = Column(String(100), unique=True, nullable=False)
 
-    Targets = relationship("Targets", back_populates="type")
+    targets = relationship("Target", back_populates="type")
 
 
 
