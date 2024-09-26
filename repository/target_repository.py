@@ -1,3 +1,5 @@
+from typing import List
+
 from returns.maybe import Nothing, Maybe
 from returns.result import Result, Success, Failure
 from sqlalchemy.exc import SQLAlchemyError
@@ -58,6 +60,12 @@ def update_target(target: Target, target_id:int) -> Result[Target, str]:
             return Success(target_to_update)
         except SQLAlchemyError as e:
             return Failure(str(e))
+
+
+def find_all_target() -> Maybe[List[Target]]:
+    with session_factory() as session:
+        targets = session.query(Target).all()
+        return Maybe.from_optional(targets)
 
 
 
